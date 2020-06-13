@@ -1,3 +1,4 @@
+import random
 import pygame
 
 pygame.init()
@@ -14,11 +15,33 @@ player_xpos = 280
 player_ypos = 465
 player_xmove = 0
 
+#Traffic
+traffic_image = []
+traffic_xpos = []
+traffic_ypos = []
+# traffic_xmove = []
+traffic_ymove = []
+total_traffic = 2
+
+for traffic_id in range(total_traffic):
+    traffic_image.append(pygame.image.load("img/traffic_car.png"))
+    traffic_xpos.append(random.randint(220,510))
+    if traffic_id == 0:
+        traffic_ypos.append(5)
+    if traffic_id == 1:
+        traffic_ypos.append(-255)
+    # traffic_xmove = 0
+    traffic_ymove.append(5)
 
 def set_player(xvalue,yvalue):
     xvalue = int(xvalue)
     yvalue = int(yvalue)
-    screen.blit(player_image, (xvalue, yvalue))
+    screen.blit(player_image,(xvalue, yvalue))
+
+def set_traffic(image,xvalue,yvalue):
+    xvalue = int(xvalue)
+    yvalue = int(yvalue)
+    screen.blit(image, (xvalue, yvalue))
 
 
 ## Main Game Loop -------------------------------
@@ -42,19 +65,31 @@ while running:
             if event.key == pygame.K_RIGHT or event.key == pygame.K_RIGHT:
                 player_xmove = 0
 
-    ## Updating player possition
+    ## Updating player & traffic position
     player_xpos = player_xpos + player_xmove
 
-    ## Creating boundaries for player
+    ## Creating boundaries for player & traffic
     if player_xpos <= 220:
         player_xpos = 220
     if player_xpos >= 510:
         player_xpos = 510
-
-
     ## Setting player New position
     set_player(player_xpos,player_ypos)
 
+    ## Updating / creating / setting traffic positions
+
+    for traffic_id in range(total_traffic):
+        traffic_ypos[traffic_id] = traffic_ypos[traffic_id] + traffic_ymove[traffic_id]
+
+        if traffic_ypos[0] >= 600:                      
+            traffic_ypos[0] = 10
+            traffic_xpos[traffic_id] = random.randint(220, 510)
+
+            if traffic_ypos[1] >= 600:
+                traffic_ypos[1] = -325
+                traffic_xpos[traffic_id] = random.randint(220, 510)
+
+
+        set_traffic(traffic_image[traffic_id],traffic_xpos[traffic_id],traffic_ypos[traffic_id])
 
     pygame.display.update()
-
