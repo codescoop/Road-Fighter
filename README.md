@@ -7,9 +7,9 @@ Road Fighter is a car-based arcade game developed using python.
 
 2. git clone this project to your preferred directory.
 
-3. `cd Space-Invaders`
+3. `cd Road-Fighter`
 
-4. `python SpaceInvaders.py`
+4. `python RoadFighter.py`
 
 ## Dependencies
 
