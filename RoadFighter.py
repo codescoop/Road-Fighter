@@ -10,9 +10,9 @@ pygame.display.set_icon(favicon)
 game_background = pygame.image.load("img/background_road_800_600.png")
 
 ## Player
-player_image = pygame.image.load("img/player_car_68_127.png")
+player_image = pygame.image.load("img/player_car_50_75.png")
 player_xpos = 280
-player_ypos = 465
+player_ypos = 510
 player_xmove = 0
 
 #Traffic
@@ -21,16 +21,12 @@ traffic_xpos = []
 traffic_ypos = []
 # traffic_xmove = []
 traffic_ymove = []
-total_traffic = 2
+total_traffic = 5
 
 for traffic_id in range(total_traffic):
-    traffic_image.append(pygame.image.load("img/traffic_car.png"))
+    traffic_image.append(pygame.image.load("img/traffic_car_64_64.png"))
     traffic_xpos.append(random.randint(220,510))
-    if traffic_id == 0:
-        traffic_ypos.append(5)
-    if traffic_id == 1:
-        traffic_ypos.append(-255)
-    # traffic_xmove = 0
+    traffic_ypos.append(random.randint(-600, 5))
     traffic_ymove.append(5)
 
 def set_player(xvalue,yvalue):
@@ -71,8 +67,8 @@ while running:
     ## Creating boundaries for player & traffic
     if player_xpos <= 220:
         player_xpos = 220
-    if player_xpos >= 510:
-        player_xpos = 510
+    if player_xpos >= 530:
+        player_xpos = 530
     ## Setting player New position
     set_player(player_xpos,player_ypos)
 
@@ -81,15 +77,12 @@ while running:
     for traffic_id in range(total_traffic):
         traffic_ypos[traffic_id] = traffic_ypos[traffic_id] + traffic_ymove[traffic_id]
 
-        if traffic_ypos[0] >= 600:                      
-            traffic_ypos[0] = 10
-            traffic_xpos[traffic_id] = random.randint(220, 510)
-
-            if traffic_ypos[1] >= 600:
-                traffic_ypos[1] = -325
-                traffic_xpos[traffic_id] = random.randint(220, 510)
-
+        if traffic_ypos[traffic_id] >= 600:
+            traffic_ypos[traffic_id] = random.randint(-600, 5)
+            traffic_xpos[traffic_id] = random.randint(220, 520)
 
         set_traffic(traffic_image[traffic_id],traffic_xpos[traffic_id],traffic_ypos[traffic_id])
 
+
     pygame.display.update()
+
