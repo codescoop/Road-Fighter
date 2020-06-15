@@ -1,0 +1,2 @@
+pygame
+cx_Freeze
