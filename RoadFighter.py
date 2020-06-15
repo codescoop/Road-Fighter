@@ -23,6 +23,12 @@ traffic_ypos = []
 traffic_ymove = []
 total_traffic = 5
 
+# score
+score = 0
+score_xpos = 1
+score_ypos = 1
+score_font = pygame.font.Font("freesansbold.ttf",32)
+
 for traffic_id in range(total_traffic):
     traffic_image.append(pygame.image.load("img/traffic_car_64_64.png"))
     traffic_xpos.append(random.randint(220,510))
@@ -39,6 +45,11 @@ def set_traffic(image,xvalue,yvalue):
     yvalue = int(yvalue)
     screen.blit(image, (xvalue, yvalue))
 
+def set_score(xvalue,yvalue):
+    xvalue = int(xvalue)
+    yvalue = int(yvalue)
+    score_value = score_font.render("Score : "+str(score),True,(255,255,255))
+    screen.blit(score_value,(xvalue,yvalue))
 
 ## Main Game Loop -------------------------------
 running = True
@@ -80,9 +91,11 @@ while running:
         if traffic_ypos[traffic_id] >= 600:
             traffic_ypos[traffic_id] = random.randint(-600, 5)
             traffic_xpos[traffic_id] = random.randint(220, 520)
+            score += 1
 
         set_traffic(traffic_image[traffic_id],traffic_xpos[traffic_id],traffic_ypos[traffic_id])
 
+    ## Setting Score ----------
+    set_score(score_xpos, score_ypos)
 
     pygame.display.update()
-
