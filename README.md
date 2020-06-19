@@ -1,8 +1,8 @@
 # Road-Fighter
-Road Fighter is a car-based arcade game developed using python.
+> `Road Fighter` is a car-based arcade game developed using python.
 <br/>
 
-![Screenshot](screenshots/screenshot01.png "Screen1")
+![Screenshot](screenshots/screenshot01_br.png "Screen1")
 
 ## Usage
 
